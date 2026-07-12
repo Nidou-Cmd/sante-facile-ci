@@ -1,0 +1,19 @@
+{
+  "name": "Santé Facile",
+  "short_name": "Santé Facile",
+  "description": "Le médecin et la pharmacie viennent à vous — télémédecine, e-prescription et livraison en Côte d'Ivoire.",
+  "lang": "fr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f9fafb",
+  "theme_color": "#059669",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

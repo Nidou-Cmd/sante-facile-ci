@@ -1,0 +1,28 @@
+# Santé Facile
+
+> Plateforme web de télémédecine + e-prescription + livraison de médicaments + prise en charge assurance pour la Côte d'Ivoire (Abidjan → Afrique de l'Ouest). Stack : React + TypeScript (Vite), TailwindCSS, Supabase (PostgreSQL/RLS/Auth/Realtime/Storage), Jitsi. Interface en français. 5 rôles : patient, médecin, pharmacie, assureur, admin.
+
+Ce fichier suit la convention llms.txt pour aider les agents IA à naviguer le dépôt.
+
+## Démarrer ici
+- [AGENTS.md](AGENTS.md) : guide complet pour agents IA (architecture, sécurité, code, tests, feuille de route)
+- [README.md](README.md) : présentation et démarrage rapide
+- [docs/DEPLOIEMENT.md](docs/DEPLOIEMENT.md) : schéma BDD détaillé, RPC, config Supabase, déploiement Vercel, recette de test
+- [docs/PLAN-LANCEMENT.md](docs/PLAN-LANCEMENT.md) : feuille de route stratégique P0→P3
+
+## Base de données (à exécuter dans l'ordre)
+- [supabase/migrations/](supabase/migrations/) : migrations 001 à 010 (schéma, RLS, RPC, triggers)
+- [src/lib/database.types.ts](src/lib/database.types.ts) : types TypeScript miroir du schéma
+
+## Code clé
+- [src/App.tsx](src/App.tsx) : routeur et providers
+- [src/contexts/AuthContext.tsx](src/contexts/AuthContext.tsx) : authentification et rôle
+- [src/lib/settings.tsx](src/lib/settings.tsx) : paramètres système dynamiques
+- [src/pages/](src/pages/) : écrans par rôle (patient, medecin, pharmacie, assureur, admin, legal)
+
+## Tests
+- [e2e/](e2e/) : harnais de tests de bout en bout (Python, API REST/Auth Supabase)
+
+## Notes importantes
+- Sécurité : RLS sur toutes les tables ; rôle admin non auto-attribuable ; secrets jamais committés.
+- Réglementaire : toutes les mentions légales ivoiriennes sont à valider par un juriste local ; partenaires de test fictifs.

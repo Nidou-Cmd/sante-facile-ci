@@ -59,8 +59,7 @@ insert into public.sante_settings (key, value) values
     "om_enabled": false, "om_merchant_id": "", "om_payment_link": "",
     "mtn_enabled": false, "mtn_merchant_id": "", "mtn_payment_link": ""
   }'::jsonb),
-  ('legal_mentions', to_jsonb(
-'ÉDITEUR DE LA PLATEFORME
+  ('legal_mentions', to_jsonb('ÉDITEUR DE LA PLATEFORME
 Santé Facile (sante-facile-ci) — [À COMPLÉTER : raison sociale, forme juridique, capital, RCCM, siège social à Abidjan, téléphone, e-mail de contact].
 
 DIRECTEUR DE LA PUBLICATION
@@ -73,9 +72,8 @@ ACTIVITÉ
 Plateforme de mise en relation pour la télémédecine, la transmission d''ordonnances électroniques aux pharmacies partenaires et la prise en charge par des organismes d''assurance. Santé Facile n''est ni un établissement de santé, ni une pharmacie, ni un assureur. Les actes médicaux relèvent exclusivement des professionnels de santé inscrits à l''Ordre. [À VALIDER : statut exact au regard du Plan National de Télémédecine et des textes applicables en Côte d''Ivoire.]
 
 URGENCES
-En cas d''urgence vitale, appelez immédiatement le SAMU (185), les sapeurs-pompiers (180) ou la police secours (110) — numéros courts gratuits en Côte d''Ivoire.')),
-  ('legal_confidentialite', to_jsonb(
-'DONNÉES COLLECTÉES
+En cas d''urgence vitale, appelez immédiatement le SAMU (185), les sapeurs-pompiers (180) ou la police secours (110) — numéros courts gratuits en Côte d''Ivoire.'::text)),
+  ('legal_confidentialite', to_jsonb('DONNÉES COLLECTÉES
 Compte (nom, e-mail, téléphone, rôle), profil médical déclaratif, adresse et position GPS (pour la recherche de pharmacies proches), rendez-vous, ordonnances, livraisons, échanges de messagerie et documents médicaux téléversés.
 
 FINALITÉS
@@ -88,9 +86,8 @@ VOS DROITS
 Accès, rectification et suppression de vos données : [À COMPLÉTER : e-mail du responsable de traitement]. Cadre applicable : loi ivoirienne n° 2013-450 relative à la protection des données à caractère personnel et régulateur ARTCI. [À VALIDER par un juriste : formalités de déclaration/autorisation ARTCI pour les données de santé.]
 
 CONSENTEMENT
-L''inscription requiert l''acceptation explicite des CGU et de la présente politique ; l''horodatage de ce consentement est conservé avec le compte.')),
-  ('legal_cgu', to_jsonb(
-'OBJET
+L''inscription requiert l''acceptation explicite des CGU et de la présente politique ; l''horodatage de ce consentement est conservé avec le compte.'::text)),
+  ('legal_cgu', to_jsonb('OBJET
 Les présentes CGU encadrent l''utilisation de Santé Facile par les patients, médecins, pharmacies et assureurs. L''utilisation vaut acceptation.
 
 RÔLE DE LA PLATEFORME
@@ -106,5 +103,5 @@ TARIFS
 L''inscription patient est gratuite. Les tarifs des consultations, médicaments et livraisons sont fixés par les professionnels partenaires et affichés avant validation. [À COMPLÉTER lors de l''activation du paiement en ligne.]
 
 DROIT APPLICABLE
-Droit ivoirien. Juridictions compétentes : tribunaux d''Abidjan. [À VALIDER.]'))
+Droit ivoirien. Juridictions compétentes : tribunaux d''Abidjan. [À VALIDER.]'::text))
 on conflict (key) do nothing;

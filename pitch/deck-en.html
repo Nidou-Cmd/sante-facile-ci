@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Santé Facile — Pitch Deck (EN)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root{
+    --emerald:#059669; --emerald-d:#047857; --emerald-dd:#064e3b;
+    --ink:#0b1220; --slate:#475569; --mist:#f0fdf4; --line:#e2e8f0;
+  }
+  html,body{ height:100%; }
+  body{
+    font-family:'Inter',system-ui,sans-serif; color:var(--ink);
+    background:#0b1220; overflow:hidden;
+  }
+  #deck{ position:fixed; inset:0; }
+  .slide{
+    position:absolute; inset:0; opacity:0; visibility:hidden;
+    transition:opacity .45s ease; display:flex; flex-direction:column;
+    padding:6vh 7vw; background:#ffffff;
+  }
+  .slide.active{ opacity:1; visibility:visible; }
+  .eyebrow{ font-size:clamp(.7rem,1.1vw,.85rem); font-weight:700; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--emerald); margin-bottom:1.4rem; }
+  h1{ font-family:'Manrope',sans-serif; font-weight:800; line-height:1.02;
+    font-size:clamp(2.2rem,6vw,4.6rem); letter-spacing:-.02em; }
+  h2{ font-family:'Manrope',sans-serif; font-weight:800; line-height:1.05;
+    font-size:clamp(1.7rem,4.2vw,3.1rem); letter-spacing:-.015em; }
+  p.lead{ font-size:clamp(1.05rem,1.8vw,1.5rem); color:var(--slate); line-height:1.5; max-width:60ch; }
+  .spacer{ flex:1; }
+  .fill{ display:flex; flex-direction:column; justify-content:center; height:100%; }
+  .grid{ display:grid; gap:1.1rem; }
+  .card{ background:#f8fafc; border:1px solid var(--line); border-radius:18px; padding:1.5rem 1.6rem; }
+  .card .n{ font-family:'Manrope',sans-serif; font-weight:800; font-size:clamp(1.8rem,3.4vw,2.7rem);
+    color:var(--emerald); letter-spacing:-.02em; line-height:1; }
+  .card .l{ margin-top:.5rem; font-size:.95rem; color:var(--slate); font-weight:500; }
+  .chip{ display:inline-flex; align-items:center; gap:.5rem; background:var(--mist);
+    color:var(--emerald-d); border:1px solid #bbf7d0; border-radius:999px;
+    padding:.5rem .95rem; font-weight:600; font-size:.9rem; }
+  .steps{ display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; }
+  .step{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:.85rem 1.05rem;
+    font-weight:600; font-size:clamp(.85rem,1.3vw,1.05rem); box-shadow:0 1px 2px rgba(0,0,0,.03); }
+  .arrow{ color:var(--emerald); font-weight:800; }
+  ul.clean{ list-style:none; display:flex; flex-direction:column; gap:1rem; }
+  ul.clean li{ display:flex; gap:.9rem; font-size:clamp(1rem,1.6vw,1.3rem); color:#1e293b; line-height:1.4; }
+  ul.clean li b{ color:var(--ink); }
+  .tick{ color:var(--emerald); font-weight:900; flex:none; }
+  .two{ grid-template-columns:1fr 1fr; }
+  .three{ grid-template-columns:repeat(3,1fr); }
+  .four{ grid-template-columns:repeat(4,1fr); }
+  .foot{ position:absolute; left:7vw; bottom:3.2vh; font-size:.8rem; color:#94a3b8; }
+  .badge-row{ display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.6rem; }
+  /* Cover + dark slides */
+  .dark{ background:linear-gradient(150deg,var(--emerald-dd) 0%, #053b30 55%, #02231c 100%); color:#fff; }
+  .dark .eyebrow{ color:#6ee7b7; }
+  .dark p.lead{ color:#c7f9e5; }
+  .dark .card{ background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.14); }
+  .dark .card .n{ color:#6ee7b7; } .dark .card .l{ color:#c7f9e5; }
+  .logo{ display:flex; align-items:center; gap:.7rem; }
+  .logo .mk{ width:54px;height:54px;border-radius:15px;background:#fff;color:var(--emerald-d);
+    display:grid;place-items:center;font-weight:900;font-size:2rem; }
+  .logo .tx{ font-family:'Manrope',sans-serif;font-weight:800;font-size:1.5rem; }
+  .kpi-hero{ font-family:'Manrope',sans-serif; font-weight:800; color:var(--emerald);
+    font-size:clamp(3rem,9vw,7rem); letter-spacing:-.03em; line-height:.95; }
+  .muted{ color:#94a3b8; font-size:.82rem; margin-top:1rem; }
+  table.fin{ width:100%; border-collapse:collapse; font-size:clamp(.85rem,1.4vw,1.1rem); }
+  table.fin th,table.fin td{ text-align:right; padding:.7rem .6rem; border-bottom:1px solid var(--line); }
+  table.fin th:first-child,table.fin td:first-child{ text-align:left; color:var(--slate); font-weight:600; }
+  table.fin thead th{ color:var(--emerald-d); font-weight:800; }
+  table.fin tr.total td{ font-weight:800; color:var(--ink); border-top:2px solid var(--emerald); }
+  .use{ display:flex; flex-direction:column; gap:.6rem; }
+  .use .bar{ display:flex; align-items:center; gap:.8rem; }
+  .use .track{ flex:1; height:12px; background:#eef2f7; border-radius:99px; overflow:hidden; }
+  .use .fillbar{ height:100%; background:linear-gradient(90deg,var(--emerald),#34d399); border-radius:99px; }
+  .use .lab{ width:auto; min-width:min(42vw,340px); font-weight:600; font-size:.95rem; }
+  .use .pct{ width:44px; text-align:right; font-weight:800; color:var(--emerald-d); }
+
+  /* Navigation */
+  #nav{ position:fixed; left:0; right:0; bottom:0; height:56px; display:flex; align-items:center;
+    justify-content:center; gap:16px; z-index:50; pointer-events:none; }
+  .dots{ display:flex; gap:9px; pointer-events:auto; }
+  .dot{ width:9px;height:9px;border-radius:50%;background:#cbd5e1;border:none;cursor:pointer;padding:0;transition:.2s; }
+  .dot.active{ background:var(--emerald); transform:scale(1.35); }
+  .navbtn{ pointer-events:auto; position:fixed; top:50%; transform:translateY(-50%);
+    width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.9);
+    color:var(--ink);font-size:1.3rem;cursor:pointer;display:grid;place-items:center; z-index:50; box-shadow:0 4px 14px rgba(0,0,0,.08); }
+  .navbtn:hover{ background:#fff; }
+  #prev{ left:18px; } #next{ right:18px; }
+  #counter{ position:fixed; top:20px; right:24px; z-index:50; font-weight:700; font-size:.85rem;
+    color:#64748b; background:rgba(255,255,255,.7); padding:.3rem .7rem; border-radius:999px; }
+  .slide.dark ~ #counter{ }
+  @media (max-width:680px){
+    .two,.three,.four{ grid-template-columns:1fr 1fr; }
+    .use .lab{ min-width:52vw; font-size:.82rem; }
+    ul.clean li{ font-size:1rem; }
+    .navbtn{ display:none; }
+  }
+</style>
+</head>
+<body>
+<div id="deck">
+
+  <!-- 1 COVER -->
+  <section class="slide dark active">
+    <div class="fill">
+      <div class="logo"><div class="mk">+</div><div class="tx">Santé Facile</div></div>
+      <h1 style="margin-top:3vh">The doctor and the pharmacy<br/>come to you.</h1>
+      <p class="lead" style="margin-top:2.5vh">Telemedicine, e-prescription, medicine delivery and insurance —
+        in a single app, built for Côte d'Ivoire.</p>
+      <div class="badge-row">
+        <span class="chip" style="background:rgba(255,255,255,.1);color:#eafff6;border-color:rgba(255,255,255,.2)">✅ Product built &amp; tested</span>
+        <span class="chip" style="background:rgba(255,255,255,.1);color:#eafff6;border-color:rgba(255,255,255,.2)">🇨🇮 Abidjan → West Africa</span>
+        <span class="chip" style="background:rgba(255,255,255,.1);color:#eafff6;border-color:rgba(255,255,255,.2)">🩺 Digital health</span>
+      </div>
+    </div>
+    <div class="foot" style="color:#9decc9">Funding dossier · 2026 · [Founder: to complete]</div>
+  </section>
+
+  <!-- 2 PROBLEME -->
+  <section class="slide">
+    <div class="eyebrow">The problem</div>
+    <h2>Getting care costs a full day.</h2>
+    <div class="spacer" style="max-height:4vh"></div>
+    <div class="grid three">
+      <div class="card"><div class="n">1 / 5 700</div><div class="l">people per doctor — with ~43% of resources concentrated in Abidjan <span style="opacity:.6">(to confirm)</span></div></div>
+      <div class="card"><div class="n">&lt; 4 %</div><div class="l">real usage of the universal-coverage (CMU) card in 2025, despite &gt; 21M enrolled</div></div>
+      <div class="card"><div class="n">~25 %</div><div class="l">of medicine purchases without a prescription (self-medication, regional studies)</div></div>
+    </div>
+    <p class="lead" style="margin-top:3vh">Travel, queues, out-of-stock medicines, unused insurance rights.
+      The missing link: a <b>simple, trusted access channel</b>.</p>
+  </section>
+
+  <!-- 3 SOLUTION -->
+  <section class="slide">
+    <div class="eyebrow">The solution</div>
+    <h2>One integrated journey, from consultation to delivery.</h2>
+    <div class="spacer" style="max-height:5vh"></div>
+    <div class="steps">
+      <span class="step">🩺 Video consultation</span><span class="arrow">→</span>
+      <span class="step">🚨 Priority emergency</span><span class="arrow">→</span>
+      <span class="step">📄 e-Prescription</span><span class="arrow">→</span>
+      <span class="step">💊 Nearest pharmacy <em style="color:var(--emerald)">(auto)</em></span><span class="arrow">→</span>
+      <span class="step">🛵 Live-tracked delivery</span><span class="arrow">→</span>
+      <span class="step">🛡️ Insurance in 1 tap</span>
+    </div>
+    <p class="lead" style="margin-top:4vh">The only player linking <b>doctor + pharmacy + delivery + insurance</b>
+      in one experience, built for mobile and low bandwidth.</p>
+  </section>
+
+  <!-- 4 PRODUIT -->
+  <section class="slide">
+    <div class="eyebrow">The product — already built</div>
+    <h2>11 modules. 5 roles. Ready for users today.</h2>
+    <div class="spacer" style="max-height:4vh"></div>
+    <div class="grid four">
+      <div class="card"><div class="n">🧑🏾</div><div class="l"><b>Patient</b><br/>Bookings, emergency, prescriptions, delivery, chat</div></div>
+      <div class="card"><div class="n">🩺</div><div class="l"><b>Médecin</b><br/>schedule, emergency queue, e-prescription</div></div>
+      <div class="card"><div class="n">💊</div><div class="l"><b>Pharmacie</b><br/>orders, stock, delivery</div></div>
+      <div class="card"><div class="n">🛡️</div><div class="l"><b>Assureur</b><br/>eligibility, coverage</div></div>
+    </div>
+    <p class="lead" style="margin-top:3vh">+ <b>Admin</b> workspace with system settings editable without a developer
+      (fees, emergency numbers, legal texts, mobile money).</p>
+  </section>
+
+  <!-- 5 PREUVE -->
+  <section class="slide dark">
+    <div class="eyebrow">The proof</div>
+    <h2 style="max-width:20ch">Not a mockup. A product tested on real infrastructure.</h2>
+    <div class="spacer" style="max-height:4vh"></div>
+    <div style="display:flex; align-items:baseline; gap:1.5rem; flex-wrap:wrap">
+      <div class="kpi-hero">80</div>
+      <p class="lead" style="max-width:34ch">automated checks <b style="color:#fff">passing</b>:
+        role sign-ups, anti-fraud security, proximity calculation, order→delivery chain, insurance cycle, notifications.</p>
+    </div>
+    <div class="badge-row" style="margin-top:3.5vh">
+      <span class="chip" style="background:rgba(255,255,255,.1);color:#eafff6;border-color:rgba(255,255,255,.2)">🔒 Health-grade security (RLS)</span>
+      <span class="chip" style="background:rgba(255,255,255,.1);color:#eafff6;border-color:rgba(255,255,255,.2)">📑 Encrypted docs &amp; signed links</span>
+      <span class="chip" style="background:rgba(255,255,255,.1);color:#eafff6;border-color:rgba(255,255,255,.2)">📱 ~115 Ko · offline · 3G</span>
+      <span class="chip" style="background:rgba(255,255,255,.1);color:#eafff6;border-color:rgba(255,255,255,.2)">💾 Version-controlled &amp; auditable code</span>
+    </div>
+  </section>
+
+  <!-- 6 MARCHE -->
+  <section class="slide">
+    <div class="eyebrow">The market</div>
+    <h2>Abidjan first, then West Africa.</h2>
+    <div class="spacer" style="max-height:4vh"></div>
+    <div class="grid three">
+      <div class="card"><div class="n">~6 M</div><div class="l">people in Greater Abidjan (primary market)</div></div>
+      <div class="card"><div class="n">~1 400</div><div class="l">pharmacies nationwide to connect <span style="opacity:.6">(to confirm)</span></div></div>
+      <div class="card"><div class="n">Mobile money</div><div class="l">near-universal (Wave leads) — payment rail ready</div></div>
+    </div>
+    <p class="lead" style="margin-top:3vh">Year-1 targets: connected urban patients, employers (staff health),
+      partner pharmacies and insurers. <b>Multi-country</b> architecture already built.</p>
+  </section>
+
+  <!-- 7 BUSINESS MODEL -->
+  <section class="slide">
+    <div class="eyebrow">Business model</div>
+    <h2>Free for patients. Commission on value created.</h2>
+    <div class="spacer" style="max-height:4vh"></div>
+    <ul class="clean">
+      <li><span class="tick">1.</span><span><b>Pharmacy commission</b> — % on each prescription delivered via the platform</span></li>
+      <li><span class="tick">2.</span><span><b>Insurer commission / fee</b> — per digitally validated coverage</span></li>
+      <li><span class="tick">3.</span><span><b>Premium consultation</b>, then <b>B2B2C employers & NGOs</b> (year 2)</span></li>
+    </ul>
+    <p class="lead" style="margin-top:3vh">Collected via <b>mobile money</b> (Wave → Orange Money → MTN).
+      Adoption first: patients never pay for basic access.</p>
+  </section>
+
+  <!-- 8 DIFFERENCIATION -->
+  <section class="slide dark">
+    <div class="eyebrow">Competition &amp; differentiation</div>
+    <h2>Where others stop, we deliver.</h2>
+    <div class="spacer" style="max-height:4vh"></div>
+    <div class="grid three">
+      <div class="card"><div class="n">Intégré</div><div class="l">only journey: consultation → pharmacy → delivery → insurance</div></div>
+      <div class="card"><div class="n">Périphéries</div><div class="l">underserved zones, not just saturated central Abidjan</div></div>
+      <div class="card"><div class="n">Interface CMU</div><div class="l">insurer eligibility check already working</div></div>
+    </div>
+    <p class="lead" style="margin-top:3vh">Vs Umed, Medico, DabaDoc/Orange Santé: complementary to operators,
+      and <b>ready to deploy now</b>.</p>
+  </section>
+
+  <!-- 9 IMPACT + FINANCES -->
+  <section class="slide">
+    <div class="eyebrow">Impact &amp; trajectory</div>
+    <h2>Measurable impact, a path to profitability.</h2>
+    <div class="spacer" style="max-height:3vh"></div>
+    <div class="grid two" style="align-items:start; gap:2.4rem">
+      <ul class="clean">
+        <li><span class="tick">🎯</span><span><b>SDG 3</b> — time-to-doctor: from hours to &lt; 15 min</span></li>
+        <li><span class="tick">🎯</span><span><b>SDG 8</b> — jobs: team, couriers, income for doctors &amp; pharmacies</span></li>
+        <li><span class="tick">🎯</span><span><b>Pilot KPIs</b> — emergencies &lt; 4 min, deliveries &lt; 24 h, NPS, % women</span></li>
+      </ul>
+      <div>
+        <table class="fin">
+          <thead><tr><th>FCFA</th><th>A1</th><th>A2</th><th>A3</th></tr></thead>
+          <tbody>
+            <tr><td>Active patients</td><td>2 000</td><td>12 000</td><td>40 000</td></tr>
+            <tr><td>Revenue</td><td>~3,6 M</td><td>~34 M</td><td>~125 M</td></tr>
+            <tr class="total"><td>Result</td><td>-20 M</td><td>-6 M</td><td>+50 M</td></tr>
+          </tbody>
+        </table>
+        <div class="muted">Explicit assumptions, to validate with an accountant. Break-even: year 3.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 ASK -->
+  <section class="slide dark">
+    <div class="eyebrow">The ask</div>
+    <h2>25M XOF (~€38k) for a 12-month pilot in Abidjan.</h2>
+    <div class="spacer" style="max-height:3vh"></div>
+    <div class="use">
+      <div class="bar"><span class="lab">👥 Pilot team (ops + field)</span><span class="track"><span class="fillbar" style="width:36%"></span></span><span class="pct">36%</span></div>
+      <div class="bar"><span class="lab">📣 Patient acquisition &amp; field</span><span class="track"><span class="fillbar" style="width:22%"></span></span><span class="pct">22%</span></div>
+      <div class="bar"><span class="lab">💳 Mobile money + video</span><span class="track"><span class="fillbar" style="width:14%"></span></span><span class="pct">14%</span></div>
+      <div class="bar"><span class="lab">⚖️ Legal compliance</span><span class="track"><span class="fillbar" style="width:12%"></span></span><span class="pct">12%</span></div>
+      <div class="bar"><span class="lab">🤝 Pilot partners + contingency</span><span class="track"><span class="fillbar" style="width:16%"></span></span><span class="pct">16%</span></div>
+    </div>
+    <p class="lead" style="margin-top:3vh">100% toward <b style="color:#fff">deployment</b> — the product is already built.
+      Targets: Fuzé, i3, Tony Elumelu, GSMA, Villgro.</p>
+    <div class="foot" style="color:#9decc9">Contact: [name · phone · email to complete] · github.com/Nidou-Cmd/sante-facile-ci</div>
+  </section>
+
+</div>
+
+<div id="counter">1 / 10</div>
+<button class="navbtn" id="prev" aria-label="Précédent">‹</button>
+<button class="navbtn" id="next" aria-label="Suivant">›</button>
+<div id="nav"><div class="dots" id="dots"></div></div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dotsWrap = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  let i = 0;
+  slides.forEach((_,k)=>{ const b=document.createElement('button'); b.className='dot'+(k===0?' active':'');
+    b.onclick=()=>go(k); dotsWrap.appendChild(b); });
+  const dots = Array.from(document.querySelectorAll('.dot'));
+  function go(n){
+    i = Math.max(0, Math.min(slides.length-1, n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    dots.forEach((d,k)=>d.classList.toggle('active',k===i));
+    counter.textContent = (i+1)+' / '+slides.length;
+  }
+  function next(){ go(i+1); } function prev(){ go(i-1); }
+  document.getElementById('next').onclick=next;
+  document.getElementById('prev').onclick=prev;
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ e.preventDefault(); next(); }
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); prev(); }
+    else if(e.key==='Escape'){ try{ window.parent.postMessage({type:'close-fullscreen'},'*'); }catch(_){}}
+  });
+  window.addEventListener('message',e=>{
+    const d=e.data&&e.data.direction; if(d==='next')next(); else if(d==='prev')prev();
+  });
+  let sx=null;
+  document.addEventListener('touchstart',e=>{ sx=e.changedTouches[0].clientX; },{passive:true});
+  document.addEventListener('touchend',e=>{ if(sx===null)return;
+    const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>50){ dx<0?next():prev(); } sx=null; },{passive:true});
+</script>
+</body>
+</html>

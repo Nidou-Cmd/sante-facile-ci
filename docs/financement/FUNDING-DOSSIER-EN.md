@@ -151,7 +151,7 @@ Collection via mobile money (Wave first, then Orange Money / MTN MoMo). Patients
 
 ## 12. FUNDING REQUEST & USE OF FUNDS
 
-**Reference scenario: 25,000,000 XOF (~€38,000 / ~$41,000)** — adjustable per funder:
+**Reference scenario: 25,000,000 XOF (~€38,000 / ~$41,000)** — the detailed 24-month, 3-scenario cash-flow plan mobilizes 40.5M XOF in total (personal contribution + sequenced grants), including a 1.5M XOF prudence reserve validated by stress test (see `PLAN-TRESORERIE-24-MOIS.md`) — adjustable per funder:
 
 | Line | Amount (XOF) | % |
 |---|---|---|

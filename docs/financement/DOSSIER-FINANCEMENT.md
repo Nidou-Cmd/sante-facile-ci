@@ -150,7 +150,7 @@ Encaissement : mobile money (Wave prioritaire, puis Orange Money / MTN MoMo). Le
 
 ## 12. DEMANDE DE FINANCEMENT & AFFECTATION DES FONDS
 
-**Scénario de référence : 25 000 000 FCFA (~38 000 €)** — ajustable selon le guichet :
+**Scénario de référence : 25 000 000 FCFA (~38 000 €)** — le plan de trésorerie détaillé (24 mois, 3 scénarios) mobilise au total 40,5 M FCFA en cumulant apport personnel et bourses séquencées, dont 1,5 M FCFA de réserve de prudence validée par stress test (voir `PLAN-TRESORERIE-24-MOIS.md`) — ajustable selon le guichet :
 
 | Poste | Montant | % |
 |---|---|---|
